@@ -24,22 +24,26 @@ def move():
     # Starts a new node
     rospy.init_node('robotont_velocity_publisher', anonymous=True)
 
-    vel_msg.linear.x = 0
-    vel_msg.linear.y = 0
-    vel_msg.linear.z = 0
-    vel_msg.angular.x = 0
-    vel_msg.angular.y = 0
-    vel_msg.angular.z = 0
 
     while not rospy.is_shutdown():
         ########################
         # YOUR CODE HERE START #
         ########################
-        vel_msg.linear.x = 0
-        vel_msg.linear.y = 0
-        vel_msg.angular.z = 0
-        velocity_publisher.publish(vel_msg)
-        rospy.sleep(0.1)
+        for i in range(0,30):
+            vel_msg.linear.x = 0.2
+            vel_msg.linear.y = 0
+            vel_msg.angular.z = 0
+            velocity_publisher.publish(vel_msg)
+            rospy.sleep(0.1)
+
+        for i in range(0,30): 
+            vel_msg.linear.x = 0
+            vel_msg.linear.y = 0
+            vel_msg.angular.z = 0.6
+            velocity_publisher.publish(vel_msg)
+            rospy.sleep(0.1)
+
+
         ######################
         # YOUR CODE HERE END #
         ######################
