@@ -28,6 +28,31 @@ def scan_callback(data):
     global distances
     distances = data
 
+#def minDist():
+#            if (distances.centerMin < 0.4) OR (distances.rightMin < 0.4) OR (distances.leftMin < 0.4):
+#                vel_msg.linear.x = -vel_msg.linear.x
+#            elseif (vel_msg.linear.x < 0):
+#                vel_msg.linear.x = -vel_msg.linear.x
+#            else:
+#                pass
+
+
+
+def turn45Right():
+    for i in range(0,1):
+        vel_msg.linear.x = 0
+        vel_msg.linear.y = 0
+        vel_msg.angular.z = 1.5
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
+
+def turn45Left():
+    for i in range(0,1):
+        vel_msg.linear.x = 0
+        vel_msg.linear.y = 0
+        vel_msg.angular.z = -1.5
+        velocity_publisher.publish(vel_msg)
+        rospy.sleep(0.1)
 
 def move():
     global distances
@@ -47,6 +72,19 @@ def move():
         ########################
         # YOUR CODE HERE START #
         ########################
+
+        if distances.centerMin > 0.6:
+            vel_msg.angular.z = 0
+            vel_msg.linear.x = 0.3
+        #    minDist()
+        elif (distances.rightMin < distances.leftMin):
+            vel_msg.linear.x = 0
+            vel_msg.angular.z = 1
+        elif (distances.rightMin > distances.leftMin):
+            vel_msg.linear.x = 0
+            vel_msg.angular.z = -1
+        else:
+            vel_msg.linear.x = -0.3
 
         ######################
         # YOUR CODE HERE END #
